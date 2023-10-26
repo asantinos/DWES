@@ -42,15 +42,15 @@
     <h2>All Clients List</h2>
     <ol>
         <?php
-        usort($clients, "compareTotalPrice");
+        $sortedClients = $clients;
+        usort($sortedClients, "compareTotalPrice");
 
-        foreach ($clients as $client) : ?>
+        foreach ($sortedClients as $client) : ?>
             <li>
                 <?= $client["name"]; ?>: $<?= !empty($client["orders"]["totalPrice"]) ? $client["orders"]["totalPrice"] : 0; ?>
             </li>
         <?php endforeach; ?>
     </ol>
-
 
 </body>
 
