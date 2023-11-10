@@ -1,10 +1,28 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
-        header('Location: welcome.html');
+function check_user($username, $password)
+{
+    if ($username == 'user' && $password == '1234') {
+        $user['username'] = 'user';
+        $user['rol'] = 0;
+        return $user;
+    } else if ($username == 'admin' && $password == 'admin') {
+        $user['username'] = 'admin';
+        $user['rol'] = 1;
+        return $user;
     } else {
-        $username = $_POST['username'];
+        return false;
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $user = check_user($_POST['username'], $_POST['password']);
+
+    if ($user == false) {
         $err = true;
+    } else {
+        session_start();
+        $_SESSION['user'] = $_POST['username'];
+        header('Location: main_session.php');
     }
 }
 ?>
