@@ -9,7 +9,7 @@
 
 <body>
     <?php
-    //en sessio hay un array vacío
+    //en session hay un array vacío
     session_start(); //lo queremos hacer siempre, pero las caracteristicas no, unicamente si es información nueva
     if (!isset($_SESSION["count"])) {
         $_SESSION["count"] = 0;

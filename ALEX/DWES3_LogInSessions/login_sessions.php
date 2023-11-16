@@ -1,11 +1,14 @@
 <?php
-function check_user($username, $password)
+function comproba_usuario($nombre, $clave)
 {
-    if ($username == 'user' && $password == '1234') {
-        $user['username'] = 'user';
+
+// "SELECT user
+
+    if ($nombre == 'usuario' && $clave == '1234') {
+        $user['nombre'] = 'user';
         $user['rol'] = 0;
         return $user;
-    } else if ($username == 'admin' && $password == 'admin') {
+    } else if ($nombre == 'admin' && $clave == 'admin') {
         $user['username'] = 'admin';
         $user['rol'] = 1;
         return $user;
@@ -15,7 +18,7 @@ function check_user($username, $password)
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user = check_user($_POST['username'], $_POST['password']);
+    $user = comproba_usuario($_POST['username'], $_POST['password']);
 
     if ($user == false) {
         $err = true;
