@@ -17,9 +17,12 @@ $conn = conectarBD();
 
 function listarPizzas($conn)
 {
+    // Preparamos la consulta
     $consulta = $conn->prepare("SELECT nombre, precio FROM pizzas");
+    // Ejecutamos la consulta
     $consulta->execute();
 
+    // Listamos las pizzas
     foreach ($consulta as $row) {
         echo $row['nombre'] . " - " . $row['precio'] . "€<br>";
     }
@@ -27,19 +30,24 @@ function listarPizzas($conn)
 
 function agregarPizza($conn)
 {
+    // Revisa si se ha enviado el formulario
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Recibimos los datos del formulario
         $nombrePizza = $_POST['nombre'];
         $costePizza = $_POST['coste'];
         $precioPizza = $_POST['precio'];
         $ingredientesPizza = $_POST['ingredientes'];
 
+        // Preparamos la consulta SQL
         $sql = $conn->prepare("INSERT INTO pizzas (nombre, coste, precio, ingredientes) VALUES (:nombre, :coste, :precio, :ingredientes)");
 
+        // Vinculamos los parámetros
         $sql->bindParam(':nombre', $nombrePizza);
         $sql->bindParam(':coste', $costePizza);
         $sql->bindParam(':precio', $precioPizza);
         $sql->bindParam(':ingredientes', $ingredientesPizza);
 
+        // Ejecutamos la consulta
         $sql->execute();
     }
 }
@@ -56,7 +64,7 @@ function agregarPizza($conn)
 </head>
 
 <body>
-    <form method="POST">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre" required>
         <br>
@@ -67,9 +75,9 @@ function agregarPizza($conn)
         <input type="number" name="precio" id="precio" required>
         <br>
         <label for="ingredientes">Ingredientes</label>
-        <input type="text" name="ingredientes" id="ingredientes" required>
+        <textarea name="ingredientes" id="" cols="30" rows="3"></textarea>
         <br>
-        <button type="submit">Agergar Pizza</button>
+        <input type="submit" value="Agregar Pizza">
     </form>
 
     <h1>Nuestras pizzas</h1>
