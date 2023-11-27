@@ -36,8 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         $stmt->execute();
-        // Redirigimos a la página de pedido.php con la sesion iniciada
         session_start();
+        // Redirigimos a la página de pedido.php con la sesion iniciada
         $_SESSION["usuario"] = $usuario;
         $_SESSION["rol"] = $rol;
         $_SESSION["nombre"] = $nombre;

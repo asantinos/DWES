@@ -62,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Domino's Pizza</title>
-    <link rel="stylesheet" href="styles/main.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
@@ -70,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <img width="100px" src="assets/Dominos_pizza_logo.svg.png" alt="Dominos Pizza Logo">
 
     <?php
-
     if (isset($err)) {
         echo "<p>Usuario o contraseña incorrectos.</p>";
     }
